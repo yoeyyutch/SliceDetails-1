@@ -33,8 +33,8 @@ namespace SliceDetails
 				int noteDirection = (int)Enum.Parse(typeof(OrderedNoteCutDirection), ni.noteData.cutDirection.ToString());
 				int noteColor = (int)ni.noteData.colorType;
 				int tileNoteDataIndex = noteColor * 9 + noteDirection;
-
-				tiles[ni.noteIndex].tileNoteInfos[tileNoteDataIndex].Add(ni);
+				int index = (int)(ni.noteGridPosition.y * 4 + ni.noteGridPosition.x);
+				tiles[index].tileNoteInfos[tileNoteDataIndex].Add(ni);
 			}
 
 			// Calculate average angles and offsets

@@ -30,17 +30,13 @@ namespace SliceDetails.Data
 			int noteCount = 0;
 			for (int i = 0; i < tileNoteInfos.Length; i++) {
 				if (tileNoteInfos[i].Count > 0) {
-					//Vector2 angleXYAverages = Vector2.zero;
 					foreach (NoteInfo noteInfo in tileNoteInfos[i]) {
 						atLeastOneNote = true;
-						//angleXYAverages.x += Mathf.Cos(noteInfo.cutAngle * Mathf.PI / 180f);
-						//angleXYAverages.y += Mathf.Sin(noteInfo.cutAngle * Mathf.PI / 180f);
-						
-								// Could just use noteInfo.cutInfo.cutDirDeviation directly
-						//angleAverages[i] += noteInfo.cutInfo.cutDirDeviation;
-						angleAverages[i] += noteInfo.cutAngle;
 
-						offsetAverages[i] += noteInfo.cutOffset;
+						angleAverages[i] += noteInfo.cutInfo.cutDirDeviation;
+
+						offsetAverages[i] += Vector3.Dot(noteInfo.cutInfo.cutNormal, noteInfo.cutInfo.cutPoint - noteInfo.notePosition) < 0 ? noteInfo.cutInfo.cutDistanceToCenter:-noteInfo.cutInfo.cutDistanceToCenter;
+
 						scoreAverages[i] += noteInfo.score;
 						scoreAverage += noteInfo.score.TotalScore;
 						noteCount++;

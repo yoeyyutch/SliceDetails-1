@@ -43,26 +43,12 @@ namespace SliceDetails
 		private void ProcessNote(NoteController noteController, NoteCutInfo noteCutInfo) {
 			if (noteController == null) return;
 			
-			Vector2 noteGridPosition;
-			noteGridPosition.y = (int)noteController.noteData.noteLineLayer;
-			noteGridPosition.x = noteController.noteData.lineIndex;
-			int noteIndex = (int)(noteGridPosition.y * 4 + noteGridPosition.x);
+			Vector2 noteGridPosition= new(noteController.noteData.lineIndex, (int)noteController.noteData.noteLineLayer);
 
 			// No ME notes allowed >:(
 			if (noteGridPosition.x >= 4 || noteGridPosition.y >= 3 || noteGridPosition.x < 0 || noteGridPosition.y < 0) return;
 
-			//Vector2 cutDirection = new Vector3(-noteCutInfo.cutNormal.y, noteCutInfo.cutNormal.x);
-			//float cutAngle = Mathf.Atan2(cutDirection.y, cutDirection.x) * Mathf.Rad2Deg + 180f;
-			float cutAngle = noteCutInfo.cutDirDeviation;
-
-			float cutOffset = noteCutInfo.cutDistanceToCenter;
-			Vector3 noteCenter = noteController.noteTransform.position;
-			if (Vector3.Dot(noteCutInfo.cutNormal, noteCutInfo.cutPoint - noteCenter) > 0f)
-			{
-				cutOffset = -cutOffset;
-			}
-
-			NoteInfo noteInfo = new NoteInfo(noteController.noteData, noteCutInfo, cutAngle, cutOffset, noteGridPosition, noteIndex);
+			NoteInfo noteInfo = new NoteInfo(noteController.noteData, noteCutInfo, noteController.transform.position, noteGridPosition);
 
 			_noteSwingInfos.Add(noteCutInfo.swingRatingCounter, noteInfo);
 

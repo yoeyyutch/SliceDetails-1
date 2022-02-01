@@ -113,6 +113,7 @@
 	<ItemGroup>
 		<None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
 		<None Include="SliceDetails.csproj.user" Condition="Exists('SliceDetails.csproj.user')" />
+		<None Include="SliceDetails.csproj.user" />
 	</ItemGroup>
 	
 	<ItemGroup>

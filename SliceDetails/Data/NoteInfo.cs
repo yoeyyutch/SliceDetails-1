@@ -11,9 +11,8 @@ namespace SliceDetails.Data
 	{
 		public NoteData noteData;
 		public NoteCutInfo cutInfo;
-		public float cutAngle;
-		public float cutOffset;
 		public Score score;
+		public Vector3 notePosition;
 		public Vector2 noteGridPosition;
 		public int noteIndex;
 
@@ -21,13 +20,11 @@ namespace SliceDetails.Data
 			
 		}
 
-		public NoteInfo(NoteData noteData, NoteCutInfo cutInfo, float cutAngle, float cutOffset, Vector2 noteGridPosition, int noteIndex) {
+		public NoteInfo(NoteData noteData, NoteCutInfo cutInfo, Vector3 notePosition, Vector2 noteGridPosition) {
 			this.noteData = noteData;
 			this.cutInfo = cutInfo;
-			this.cutAngle = cutAngle;
-			this.cutOffset = cutOffset;
+			this.notePosition = notePosition;
 			this.noteGridPosition = noteGridPosition;
-			this.noteIndex = noteIndex;
 		}
 	}
 }
