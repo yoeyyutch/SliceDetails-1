@@ -30,5 +30,12 @@ namespace SliceDetails.UI
 			get { return Plugin.Settings.TrueCutOffsets; }
 			set { Plugin.Settings.TrueCutOffsets = value; }
 		}
+
+		[UIValue("show-liveview")]
+		public bool ShowLiveView
+		{
+			get { return Plugin.Settings.ShowLiveView; }
+			set { Plugin.Settings.ShowLiveView = value; }
+		}
 	}
 }

@@ -111,6 +111,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <Compile Remove="UI\LiveViewController.cs" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
 		<None Include="SliceDetails.csproj.user" Condition="Exists('SliceDetails.csproj.user')" />
 		<None Include="SliceDetails.csproj.user" />

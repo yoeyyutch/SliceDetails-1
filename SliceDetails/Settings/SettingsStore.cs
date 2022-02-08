@@ -20,5 +20,6 @@ namespace SliceDetails.Settings
 		public bool ShowInCompletionScreen = true;
 		public bool ShowHandle = false;
 		public bool TrueCutOffsets = true;
+		public bool ShowLiveView = true;
 	}
 }

@@ -8,10 +8,10 @@ namespace SliceDetails
 	internal class SliceProcessor
 	{
 		public Tile[] tiles = new Tile[12];
-		public bool ready { get; private set; } = false;
+		public bool Ready { get; private set; } = false;
 
 		public void ResetProcessor() {
-			ready = false;
+			Ready = false;
 
 			tiles = new Tile[12];
 
@@ -42,7 +42,7 @@ namespace SliceDetails
 				tiles[i].CalculateAverages();
 			}
 
-			ready = true;
+			Ready = true;
 		}
 	}
 }
