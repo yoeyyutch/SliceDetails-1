@@ -30,6 +30,7 @@ namespace SliceDetails
 		public void Initialize() {
 			_beatmapObjectManager.noteWasCutEvent += OnNoteWasCut;
 			_sliceProcessor.ResetProcessor();
+			_slices.Clear();
 			_sliceParent.transform.position = new(0, 0, 5f);
 			_sliceParent.transform.rotation = Quaternion.identity;
 			_sliceParent.SetActive(Plugin.Settings.ShowLiveView);
@@ -40,6 +41,7 @@ namespace SliceDetails
 			_beatmapObjectManager.noteWasCutEvent -= OnNoteWasCut;
 			// Process slices once the map ends
 			ProcessSlices();
+			GameObject.Destroy(_sliceParent);
 		}
 
 		public void ProcessSlices() {
@@ -87,14 +89,17 @@ namespace SliceDetails
 
 		public void DrawSlice(NoteInfo noteInfo)
 		{
-			float angle = noteInfo.noteData.cutDirection.RotationAngle() + noteInfo.cutInfo.cutDirDeviation;
+			float angle = noteInfo.noteData.cutDirection.RotationAngle() + noteInfo.cutInfo.cutDirDeviation+90f;
 			float index = (int)(noteInfo.noteGridPosition.y * 4 + noteInfo.noteGridPosition.x -5.5f);
 
 			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			go.transform.SetParent(_sliceContainer);
-			go.transform.localPosition = noteInfo.cutInfo.cutPoint;
-			go.transform.localScale = Mathf.Abs(index)>1f ? new(1f, .1f, .1f): Vector3.zero;
-			go.transform.localRotation = Quaternion.Euler(0, 0, angle);
+			go.transform.SetParent(_sliceParent.transform);
+			//go.transform.SetPositionAndRotation(_sliceParent.transform.position, _sliceParent.transform.rotation);
+			go.transform.SetLocalPositionAndRotation(noteInfo.cutInfo.cutPoint, Quaternion.Euler(0, 0, angle));
+			//go.transform.localPosition = noteInfo.cutInfo.cutPoint;
+			//go.transform.localScale = Mathf.Abs(index)>1f ? new(1f, .1f, .1f): Vector3.zero;
+			go.transform.localScale = new(.5f, .005f, .005f);
+			//go.transform.localRotation = Quaternion.Euler(0, 0, angle);
 			Renderer r = go.GetComponent<Renderer>();
 			r.sharedMaterial = Utils.ColorSchemeManager.SliceMaterial(noteInfo.noteData.colorType);
 			go.SetActive(true);
