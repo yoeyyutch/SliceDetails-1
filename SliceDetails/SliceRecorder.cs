@@ -12,9 +12,10 @@ namespace SliceDetails
 	{
 		private readonly BeatmapObjectManager _beatmapObjectManager;
 		private readonly SliceProcessor _sliceProcessor;
-		public GameObject _sliceParent;
-		public Transform _sliceContainer;
-		public List<GameObject> _slices = new();
+		public GameObject SliceMap;
+		public List<GameObject> Slices = new();
+		public List<Transform> Cutlist = new();
+		public Material[] SliceMaterial;
 
 
 		private Dictionary<ISaberSwingRatingCounter, NoteInfo> _noteSwingInfos = new Dictionary<ISaberSwingRatingCounter, NoteInfo>();
@@ -30,18 +31,24 @@ namespace SliceDetails
 		public void Initialize() {
 			_beatmapObjectManager.noteWasCutEvent += OnNoteWasCut;
 			_sliceProcessor.ResetProcessor();
-			_slices.Clear();
-			_sliceParent.transform.position = new(0, 0, 5f);
-			_sliceParent.transform.rotation = Quaternion.identity;
-			_sliceParent.SetActive(Plugin.Settings.ShowLiveView);
-			
+			SliceMap = new();
+			SliceMap.transform.position = new(0, 0, Plugin.Settings.SliceDistance);
+			SliceMap.transform.rotation = Quaternion.identity;
+			SliceMap.SetActive(Plugin.Settings.ShowLiveView);
+			Slices.Clear();
+			SliceMaterial = new Material[2]
+			{
+				Utils.ColorSchemeManager.SliceMaterial(ColorType.ColorA),
+				Utils.ColorSchemeManager.SliceMaterial(ColorType.ColorB),
+			};
+
 		}
 
 		public void Dispose() {
 			_beatmapObjectManager.noteWasCutEvent -= OnNoteWasCut;
 			// Process slices once the map ends
 			ProcessSlices();
-			GameObject.Destroy(_sliceParent);
+			GameObject.Destroy(SliceMap);
 		}
 
 		public void ProcessSlices() {
@@ -90,22 +97,31 @@ namespace SliceDetails
 		public void DrawSlice(NoteInfo noteInfo)
 		{
 			float angle = noteInfo.noteData.cutDirection.RotationAngle() + noteInfo.cutInfo.cutDirDeviation+90f;
-			float index = (int)(noteInfo.noteGridPosition.y * 4 + noteInfo.noteGridPosition.x -5.5f);
+			//float index = (int)(noteInfo.noteGridPosition.y * 4 + noteInfo.noteGridPosition.x -5.5f);
 
-			GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			go.transform.SetParent(_sliceParent.transform);
-			//go.transform.SetPositionAndRotation(_sliceParent.transform.position, _sliceParent.transform.rotation);
-			go.transform.SetLocalPositionAndRotation(noteInfo.cutInfo.cutPoint, Quaternion.Euler(0, 0, angle));
+			GameObject slash = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			slash.transform.SetParent(SliceMap.transform);
+			slash.transform.SetPositionAndRotation(SliceMap.transform.position, SliceMap.transform.rotation);
+			slash.transform.SetLocalPositionAndRotation(noteInfo.cutInfo.cutPoint, Quaternion.Euler(0, 0, angle));
+			slash.transform.localScale = new(Plugin.Settings.SliceLength, Plugin.Settings.SliceWidth, Plugin.Settings.SliceWidth);
+			slash.GetComponent<Renderer>().sharedMaterial =  SliceMaterial[(int)noteInfo.noteData.colorType];
+			slash.SetActive(true);
+			Slices.Add(slash);
+
+
 			//go.transform.localPosition = noteInfo.cutInfo.cutPoint;
 			//go.transform.localScale = Mathf.Abs(index)>1f ? new(1f, .1f, .1f): Vector3.zero;
-			go.transform.localScale = new(.5f, .005f, .005f);
 			//go.transform.localRotation = Quaternion.Euler(0, 0, angle);
-			Renderer r = go.GetComponent<Renderer>();
-			r.sharedMaterial = Utils.ColorSchemeManager.SliceMaterial(noteInfo.noteData.colorType);
-			go.SetActive(true);
-			_slices.Add(go);
+			//Renderer r = slash.GetComponent<Renderer>();
+			//r.sharedMaterial = Utils.ColorSchemeManager.SliceMaterial(noteInfo.noteData.colorType);
+
 
 		}
+
+		//public void FadeSlices()
+		//{
+		//	foreach(GameObject g in Slices) { }
+		//}
 
 	}
 }

@@ -21,5 +21,11 @@ namespace SliceDetails.Settings
 		public bool ShowHandle = false;
 		public bool TrueCutOffsets = true;
 		public bool ShowLiveView = true;
+		public float SliceLength = .5f;
+		public float SliceWidth = .005f;
+		public float SliceTransparency = .2f;
+		public float SliceDistance = 0;
+
+
 	}
 }

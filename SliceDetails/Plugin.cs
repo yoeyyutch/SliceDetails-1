@@ -14,6 +14,7 @@ namespace SliceDetails
 	public class Plugin
 	{
 		internal static SettingsStore Settings { get; private set; }
+		
 
 		[Init]
 		public void Init(IPA.Logging.Logger logger, Config config, Zenjector zenject) {
