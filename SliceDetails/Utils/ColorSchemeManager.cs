@@ -42,8 +42,8 @@ namespace SliceDetails.Utils
 			Material m = new(Shader.Find("Sprites/Default"));
 			Color a = GetMainColorScheme().saberAColor;
 			Color b = GetMainColorScheme().saberBColor;
-			Color cA = new(a.r, a.g, a.b, .25f);
-			Color cB = new(b.r, b.g, b.b, .25f);
+			Color cA = new(a.r, a.g, a.b, Plugin.Settings.SliceTransparency);
+			Color cB = new(b.r, b.g, b.b, Plugin.Settings.SliceTransparency);
 			if (colorType == (int)ColorType.ColorA)
 				m.color = cA;
 			else if (colorType == (int)ColorType.ColorB)

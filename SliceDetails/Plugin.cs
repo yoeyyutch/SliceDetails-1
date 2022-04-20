@@ -7,6 +7,8 @@ using SliceDetails.Settings;
 using BeatSaberMarkupLanguage.Settings;
 using SliceDetails.UI;
 
+using IPALogger = IPA.Logging.Logger;
+
 namespace SliceDetails
 {
 
@@ -14,15 +16,15 @@ namespace SliceDetails
 	public class Plugin
 	{
 		internal static SettingsStore Settings { get; private set; }
-		
+		internal static IPALogger Log { get; private set; }
 
 		[Init]
-		public void Init(IPA.Logging.Logger logger, Config config, Zenjector zenject) {
+		public void Init(IPALogger logger, Config config, Zenjector zenject) {
 			Settings = config.Generated<SettingsStore>();
 
 			BSMLSettings.instance.AddSettingsMenu("SliceDetails", $"SliceDetails.UI.Views.settingsView.bsml", SettingsViewController.instance);
-			
-			zenject.UseLogger(logger);
+
+			Plugin.Log = logger;
 			
 			zenject.Install<SDAppInstaller>(Location.App);
 			zenject.Install<SDMenuInstaller>(Location.Menu);

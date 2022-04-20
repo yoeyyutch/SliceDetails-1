@@ -12,6 +12,12 @@ namespace SliceDetails.Settings
 {
 	internal class SettingsStore
 	{
+		public float SliceDistance = 0f;
+		public float SliceLength = .5f;
+		public float SliceWidth = .005f;
+		public float SliceTransparency = .2f;
+		public bool ShowLiveView = true;
+
 		public Vector3 ResultsUIPosition = new Vector3(-3.25f, 3.25f, 1.75f);
 		public Vector3 ResultsUIRotation = new Vector3(340.0f, 292.0f, 0.0f);
 		public Vector3 PauseUIPosition = new Vector3(-3.0f, 1.5f, 0.0f);
@@ -20,11 +26,11 @@ namespace SliceDetails.Settings
 		public bool ShowInCompletionScreen = true;
 		public bool ShowHandle = false;
 		public bool TrueCutOffsets = true;
-		public bool ShowLiveView = true;
-		public float SliceLength = .5f;
-		public float SliceWidth = .005f;
-		public float SliceTransparency = .2f;
-		public float SliceDistance = 0;
+
+		private readonly PlayerSpecificSettings playerSpecificSettings;
+		public float PlayerHeight => playerSpecificSettings.playerHeight;
+
+
 
 
 	}

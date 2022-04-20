@@ -1,36 +1,56 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
+//using BeatSaberMarkupLanguage.Components;
+//using BeatSaberMarkupLanguage.ViewControllers;
+using BeatSaberMarkupLanguage.Components.Settings;
+//using BeatSaberMarkupLanguage.GameplaySetup;
+//using System.ComponentModel;
+
 
 namespace SliceDetails.UI
 {
 	internal class SettingsViewController : PersistentSingleton<SettingsViewController>
 	{
-		[UIValue("slice-distance")]
-		public float SliceDistance
+		[UIComponent("distance-slider")]
+		private SliderSetting Distance_Slider;
+
+		[UIValue("distance_value")]
+		private float Distance_Value
 		{
-			get { return Plugin.Settings.SliceDistance; }
-			set { Plugin.Settings.SliceDistance = value; }
+			get => Plugin.Settings.SliceDistance;
+			set => Plugin.Settings.SliceDistance = value;
 		}
 
-		[UIValue("slice-length")]
-		public float SliceLength
+		[UIAction("set_distance_value")]
+		void Set_Distance(float value)
 		{
-			get { return Plugin.Settings.SliceLength; }
-			set { Plugin.Settings.SliceLength = value; }
+			Distance_Value = value;
 		}
 
-		[UIValue("slice-width")]
-		public float SlideWidth
-		{
-			get { return Plugin.Settings.SliceWidth; }
-			set { Plugin.Settings.SliceWidth = value; }
-		}
+		[UIAction("distance_slider_formatter")]
+		private string Distance_Slider_Formatter(float value) => value.ToString("0.##") + " m";
+		
 
-		[UIValue("slice-transparency")]
-		public float SliceTransparency
-		{
-			get { return Plugin.Settings.SliceTransparency; }
-			set { Plugin.Settings.SliceTransparency = value; }
-		}
+
+		//[UIValue("slice-length")]
+		//public float SliceLength
+		//{
+		//	get { return Plugin.Settings.SliceLength; }
+		//	set { Plugin.Settings.SliceLength = value; }
+		//}
+
+		//[UIValue("slice-width")]
+		//public float SliceWidth
+		//{
+		//	get { return Plugin.Settings.SliceWidth; }
+		//	set { Plugin.Settings.SliceWidth = value; }
+		//}
+
+		//[UIValue("slice-transparency")]
+		//public float SliceTransparency
+		//{
+		//	get { return Plugin.Settings.SliceTransparency; }
+		//	set { Plugin.Settings.SliceTransparency = value; }
+		//}
 
 		[UIValue("show-liveview")]
 		public bool ShowLiveView
@@ -65,7 +85,5 @@ namespace SliceDetails.UI
 			get { return Plugin.Settings.TrueCutOffsets; }
 			set { Plugin.Settings.TrueCutOffsets = value; }
 		}
-
-
 	}
 }
