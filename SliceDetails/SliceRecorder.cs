@@ -41,7 +41,7 @@ namespace SliceDetails
 				Utils.ColorSchemeManager.SliceMaterial(ColorType.ColorA),
 				Utils.ColorSchemeManager.SliceMaterial(ColorType.ColorB),
 			};
-			Plugin.Log.Info(Plugin.Settings.PlayerHeight.ToString("0.###")+ " m");
+			//Plugin.Log.Info(Plugin.Settings.PlayerHeight.ToString("0.###")+ " m");
 		
 
 		}

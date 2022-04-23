@@ -32,14 +32,12 @@ namespace SliceDetails.UI
 			_gridViewControllerParent?.SetActive(true);
 			_uiCreator.ParentFloatingScreen(pauseMenuManager.transform);
 			_sliceRecorder.ProcessSlices();
-			_sliceRecorder.SliceMap?.SetActive(true);
 			_gridViewController.SetTileScores();
 		}
 
 		public void PauseMenuClosed(PauseMenuManager pauseMenuManager) {
 			_gridViewController.CloseModal(false);
 			_gridViewControllerParent?.SetActive(false);
-			_sliceRecorder.SliceMap?.SetActive(Plugin.Settings.ShowLiveView);
 		}
 
 		public void CleanUp() {
