@@ -7,10 +7,33 @@ using UnityEngine;
 
 namespace SliceDetails.UI
 {
-	class LiveViewController
+	class SliceMap
 	{
-		public Transform _sliceContainer;
-		public List<GameObject> _slices = new();
+		private readonly GameObject SliceMapGO;
+
+		public SliceMap()
+		{
+			SliceMapGO = new();
+			SliceMapGO.transform.SetPositionAndRotation(Plugin.Settings.SliceMapPosition, Quaternion.Euler(Plugin.Settings.SliceMapRotation));
+		}
+
+		void NoteOutline(Vector3 position, float lineThickness)
+		{
+			GameObject note = new();
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+		//public Transform _sliceContainer;
+		//public List<GameObject> _slices = new();
 
 		//public void DrawSlice(int index, int notetype, Vector3 cutPosition, float scaleFactor, string shader, float missDistance, Vector3 cutNormal)
 		//{
@@ -48,10 +71,6 @@ namespace SliceDetails.UI
 		//_slices[index].transform.position = new Vector3(cutPosition.x, -.5f, cutPosition.y + 1f);
 		//_slices[index].transform.rotation = dotRotation;
 		//_slices[index].transform.localScale = dotScale;
-
-
-
 		//}
-
-	}
-}
+//	}
+//}

@@ -2,6 +2,7 @@
 using SliceDetails.Data;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace SliceDetails
 {
@@ -19,22 +20,23 @@ namespace SliceDetails
 			for (int i = 0; i < 12; i++) {
 				tiles[i] = new Tile();
 				for (int j = 0; j < 18; j++) {
-					tiles[i].tileNoteInfos[j] = new List<NoteInfo>();
+					tiles[i].sliceList[j] = new List<SliceInfo>();
 				}
 			}
 		}
 
-		public void ProcessSlices(List<NoteInfo> noteInfos) {
+		public void ProcessSlices(List<SliceInfo> sliceInfo) {
 			ResetProcessor();
 
 			// Populate the tiles' note infos.  Each List<NoteInfo> in tileNoteInfos cooresponds to each direction/color combination (i.e. DownLeft/ColorA)
 			// where elements 0-8 are ColorA notes and elements 9-17 are ColorB notes numbering from NoteCutDirection.Up (0) to NoteCutDirection.Any (8)
-			foreach (NoteInfo ni in noteInfos) {
-				int noteDirection = (int)Enum.Parse(typeof(OrderedNoteCutDirection), ni.noteData.cutDirection.ToString());
-				int noteColor = (int)ni.noteData.colorType;
+			foreach (SliceInfo slice in sliceInfo) {
+				Vector2 gridPos = new Vector2((int)slice.noteData.noteLineLayer,slice.noteData.lineIndex);
+				int noteDirection = (int)Enum.Parse(typeof(OrderedNoteCutDirection), slice.noteData.cutDirection.ToString());
+				int noteColor = (int)slice.noteData.colorType;
 				int tileNoteDataIndex = noteColor * 9 + noteDirection;
-				int index = (int)(ni.noteGridPosition.y * 4 + ni.noteGridPosition.x);
-				tiles[index].tileNoteInfos[tileNoteDataIndex].Add(ni);
+				int index = (int)((int)slice.noteData.noteLineLayer * 4 + slice.noteData.lineIndex);
+				tiles[index].sliceList[tileNoteDataIndex].Add(slice);
 			}
 
 			// Calculate average angles and offsets

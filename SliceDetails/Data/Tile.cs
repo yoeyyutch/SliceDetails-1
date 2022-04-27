@@ -9,7 +9,7 @@ namespace SliceDetails.Data
 {
 	internal class Tile
 	{
-		public List<NoteInfo>[] tileNoteInfos = new List<NoteInfo>[18];
+		public List<SliceInfo>[] sliceList = new List<SliceInfo>[18];
 		public float[] angleAverages = new float[18];
 		public float[] offsetAverages = new float[18];
 		public Score[] scoreAverages = new Score[18];
@@ -28,26 +28,26 @@ namespace SliceDetails.Data
 			}
 
 			int noteCount = 0;
-			for (int i = 0; i < tileNoteInfos.Length; i++) {
-				if (tileNoteInfos[i].Count > 0) {
-					foreach (NoteInfo noteInfo in tileNoteInfos[i]) {
+			for (int i = 0; i < sliceList.Length; i++) {
+				if (sliceList[i].Count > 0) {
+					foreach (SliceInfo slice in sliceList[i]) {
 						atLeastOneNote = true;
 
-						angleAverages[i] += noteInfo.cutInfo.cutDirDeviation;
+						angleAverages[i] += slice.cutInfo.cutDirDeviation;
 
-						offsetAverages[i] += Vector3.Dot(noteInfo.cutInfo.cutNormal, noteInfo.cutInfo.cutPoint - noteInfo.notePosition) < 0 ? noteInfo.cutInfo.cutDistanceToCenter:-noteInfo.cutInfo.cutDistanceToCenter;
+						offsetAverages[i] += Vector3.Dot(slice.cutInfo.cutNormal, slice.cutInfo.cutPoint - slice.notePosition) < 0 ? slice.cutInfo.cutDistanceToCenter:-slice.cutInfo.cutDistanceToCenter;
 
-						scoreAverages[i] += noteInfo.score;
-						scoreAverage += noteInfo.score.TotalScore;
+						scoreAverages[i] += slice.score;
+						scoreAverage += slice.score.TotalScore;
 						noteCount++;
 					}
 					//angleXYAverages.x /= tileNoteInfos[i].Count;
 					//angleXYAverages.y /= tileNoteInfos[i].Count;
 					//angleAverages[i] = Mathf.Atan2(angleXYAverages.y, angleXYAverages.x) * 180f / Mathf.PI;
 
-					angleAverages[i] /= tileNoteInfos[i].Count;
-					offsetAverages[i] /= tileNoteInfos[i].Count;
-					scoreAverages[i] /= tileNoteInfos[i].Count;
+					angleAverages[i] /= sliceList[i].Count;
+					offsetAverages[i] /= sliceList[i].Count;
+					scoreAverages[i] /= sliceList[i].Count;
 				}
 			}
 			scoreAverage /= noteCount;

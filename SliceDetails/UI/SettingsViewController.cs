@@ -10,24 +10,31 @@ namespace SliceDetails.UI
 {
 	internal class SettingsViewController : PersistentSingleton<SettingsViewController>
 	{
-		[UIComponent("distance-slider")]
-		private SliderSetting Distance_Slider;
+		//[UIComponent("distance-slider")]
+		//private SliderSetting Distance_Slider;
 
-		[UIValue("distance_value")]
-		private float Distance_Value
-		{
-			get => Plugin.Settings.SliceDistance;
-			set => Plugin.Settings.SliceDistance = value;
-		}
+		//[UIValue("distance_value")]
+		//private float Distance_Value
+		//{
+		//	get
+		//	{
+		//		return Plugin.Settings.SliceDistance;
+		//	}
 
-		[UIAction("set_distance_value")]
-		void Set_Distance(float value)
-		{
-			Distance_Value = value;
-		}
+		//	set
+		//	{
+		//		Plugin.Settings.SliceDistance = value;
+		//	}
+		//}
 
-		[UIAction("distance_slider_formatter")]
-		private string Distance_Slider_Formatter(float value) => value.ToString("0.##") + " m";
+		//[UIAction("set_distance_value")]
+		//void Set_Distance(float value)
+		//{
+		//	Distance_Value = value;
+		//}
+
+		//[UIAction("distance_slider_formatter")]
+		//private string Distance_Slider_Formatter(float value) => value.ToString("0.##") + " m";
 		
 
 
@@ -58,9 +65,9 @@ namespace SliceDetails.UI
 			get { return Plugin.Settings.ShowLiveView; }
 			set { Plugin.Settings.ShowLiveView = value; }
 		}
-
 		[UIValue("show-pause")]
-		public bool ShowInPauseMenu {
+		public bool ShowInPauseMenu
+		{
 			get { return Plugin.Settings.ShowInPauseMenu; }
 			set { Plugin.Settings.ShowInPauseMenu = value; }
 		}
@@ -84,6 +91,20 @@ namespace SliceDetails.UI
 		{
 			get { return Plugin.Settings.TrueCutOffsets; }
 			set { Plugin.Settings.TrueCutOffsets = value; }
+		}
+
+		[UIValue("count-arcs")]
+		public bool CountArcs
+		{
+			get { return Plugin.Settings.CountArcs; }
+			set { Plugin.Settings.CountArcs = value; }
+		}
+
+		[UIValue("count-chains")]
+		public bool CountChains
+		{
+			get { return Plugin.Settings.CountChains; }
+			set { Plugin.Settings.CountChains = value; }
 		}
 	}
 }

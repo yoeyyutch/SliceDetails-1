@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace SliceDetails.Data
 {
-	internal class NoteInfo
+	internal class SliceInfo
 	{
 		public NoteData noteData;
 		public NoteCutInfo cutInfo;
@@ -16,15 +16,16 @@ namespace SliceDetails.Data
 		public Vector2 noteGridPosition;
 		public int noteIndex;
 
-		public NoteInfo() { 
+		public SliceInfo() { 
 			
 		}
 
-		public NoteInfo(NoteData noteData, NoteCutInfo cutInfo, Vector3 notePosition, Vector2 noteGridPosition) {
-			this.noteData = noteData;
+		public SliceInfo(NoteCutInfo cutInfo) {
 			this.cutInfo = cutInfo;
-			this.notePosition = notePosition;
-			this.noteGridPosition = noteGridPosition;
+			this.noteData = cutInfo.noteData;
+			this.notePosition = cutInfo.notePosition;
+			this.noteGridPosition = new(cutInfo.noteData.lineIndex, (int)cutInfo.noteData.noteLineLayer);
+			this.noteIndex = (int)(noteGridPosition.y * 4 + noteGridPosition.x);
 		}
 	}
 }

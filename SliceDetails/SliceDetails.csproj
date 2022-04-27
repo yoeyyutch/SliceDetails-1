@@ -112,6 +112,7 @@
 	
 	<ItemGroup>
 	  <Compile Remove="UI\LiveViewController.cs" />
+	  <Compile Remove="UI\SliceMap.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>
