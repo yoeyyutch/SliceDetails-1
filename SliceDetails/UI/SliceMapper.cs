@@ -7,11 +7,12 @@ using UnityEngine;
 
 namespace SliceDetails.UI
 {
-	class SliceMap
+	internal class SliceMapper
 	{
+		private readonly SliceRecorder sliceRecorder;
 		private readonly GameObject SliceMapGO;
 
-		public SliceMap()
+		public SliceMapper()
 		{
 			SliceMapGO = new();
 			SliceMapGO.transform.SetPositionAndRotation(Plugin.Settings.SliceMapPosition, Quaternion.Euler(Plugin.Settings.SliceMapRotation));

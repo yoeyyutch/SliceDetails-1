@@ -37,7 +37,7 @@ namespace SliceDetails
 			_beatmapObjectManager.noteWasCutEvent += OnNoteWasCut;
 			_scoreController.scoringForNoteFinishedEvent += ScoringForNoteFinishedHandler;
 			_sliceProcessor.ResetProcessor();
-			CreateSliceMap();
+			_sliceProcessor.CreateSliceMap();
 			//Plugin.Log.Info(Plugin.Settings.PlayerHeight.ToString("0.###")+ " m");
 		}
 
@@ -47,7 +47,7 @@ namespace SliceDetails
 			_scoreController.scoringForNoteFinishedEvent -= ScoringForNoteFinishedHandler;
 			// Process slices once the map ends
 			ProcessSlices();
-			GameObject.Destroy(SliceMap);
+			GameObject.Destroy(_sliceProcessor.SliceMap);
 		}
 
 		public void ProcessSlices()
@@ -75,22 +75,16 @@ namespace SliceDetails
 			if (noteController == null
 				|| noteCutInfo.noteData.colorType == ColorType.None
 				|| !noteCutInfo.allIsOK
-				|| !NoteOnGrid(noteCutInfo))
-				return;
+				    // Verify note is on standard 4 x 3 grid
+				|| !Enumerable.Range(0, 4).Contains(noteCutInfo.noteData.lineIndex) && Enumerable.Range(0, 3).Contains((int)noteCutInfo.noteData.noteLineLayer))
+			return;
 			ProcessNote(noteController, noteCutInfo);
-		}
-
-		public bool NoteOnGrid(NoteCutInfo noteCutInfo)
-		{
-			return Enumerable.Range(0, 4).Contains(noteCutInfo.noteData.lineIndex) && Enumerable.Range(0, 3).Contains((int)noteCutInfo.noteData.noteLineLayer);
 		}
 
 		private void ProcessNote(NoteController noteController, NoteCutInfo noteCutInfo)
 		{
-			SliceInfo s = new(noteCutInfo);
+			SliceInfo s = new SliceInfo(noteCutInfo);
 			_sliceScore.Add(s.noteData, s);
-
-
 		}
 
 		public void ScoringForNoteFinishedHandler(ScoringElement scoringElement)
@@ -127,7 +121,11 @@ namespace SliceDetails
 						break;
 				}
 
-				if (Plugin.Settings.ShowLiveView) DrawSlice(slice.cutInfo);
+				if (Plugin.Settings.SliceMappingEnabled)
+				{
+					_sliceProcessor.CreateSlice(slice.cutInfo);
+				}
+
 				_sliceScore.Remove(goodCutScoringElement.noteData);
 			}
 

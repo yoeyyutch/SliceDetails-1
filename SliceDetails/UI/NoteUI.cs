@@ -92,7 +92,7 @@ namespace SliceDetails.UI
 			_hoverHintController = hoverHintController;
 		}
 
-		public void SetNoteData(float angle, float offset, Score score) {
+		public void SetNoteData(float angle, float offset, Score score, int notes) {
 			_noteHoverHint.SetField("_hoverHintController", _hoverHintController);
 
 			if (angle == 0f && offset == 0f) {
@@ -114,7 +114,7 @@ namespace SliceDetails.UI
 					_cutDistanceImage.transform.localScale = new Vector2(-offset * (1.995f + score.Offset*0.0665f), 1.0f);
 				}
 				_directionArrowImage.color = Color.white;
-				_noteHoverHint.text = "Average score - " + String.Format("{0:0.00}", score.TotalScore) + " <color=#666666>(" + String.Format("{0:0.00}", score.PreSwing) + ", " + String.Format("{0:0.00}", score.PostSwing) + ", " + String.Format("{0:0.00}", score.Offset) + ")</color>";
+				_noteHoverHint.text = "Average score for " + notes.ToString() + " notes: " + String.Format("{0:0.00}", score.TotalScore) + " <color=#666666>(" + String.Format("{0:0.00}", score.PreSwing) + ", " + String.Format("{0:0.00}", score.PostSwing) + ", " + String.Format("{0:0.00}", score.Offset) + ")</color>";
 			}
 		}
 	}

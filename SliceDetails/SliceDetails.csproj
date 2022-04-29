@@ -13,6 +13,10 @@
     </PropertyGroup>
 	
 	<ItemGroup>
+		<Reference Include="0Harmony">
+		  <HintPath>..\..\..\..\..\..\Program Files\Oculus\Software\Software\hyperbolic-magnetism-beat-saber\Libs\0Harmony.dll</HintPath>
+		  <Private>False</Private>
+		</Reference>
 		<Reference Include="BeatmapCore">
 		  <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\BeatmapCore.dll</HintPath>
 		</Reference>
@@ -112,10 +116,10 @@
 	
 	<ItemGroup>
 	  <Compile Remove="UI\LiveViewController.cs" />
-	  <Compile Remove="UI\SliceMap.cs" />
 	</ItemGroup>
 	
 	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
 		<None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
 		<None Include="SliceDetails.csproj.user" Condition="Exists('SliceDetails.csproj.user')" />
 		<None Include="SliceDetails.csproj.user" />

@@ -15,18 +15,19 @@ using SliceDetails.Data;
 
 namespace SliceDetails.UI
 {
+
 	public enum OrderedNoteCutDirection
-	{
-		UpLeft = 0,
-		Up = 1,
-		UpRight = 2,
-		Left = 3,
-		Any = 4,
-		Right = 5,
-		DownLeft = 6,
-		Down = 7,
-		DownRight = 8,
-		None = 9
+	{                    // BS NoteCutDirection list
+		UpLeft = 0,      // UpLeft = 4,
+		Up = 1,          // Up = 0,
+		UpRight = 2,     // UpRight = 5,
+		Left = 3,        // Left = 2,
+		Any = 4,         // Any = 8,
+		Right = 5,       // Right = 3,
+		DownLeft = 6,    // DownLeft = 6,
+		Down = 7,        // Down = 1,
+		DownRight = 8,   // DownRight = 7,
+		None = 9,        // None = 9
 	}
 
 	[HotReload(RelativePathToLayout = @"Views\gridView.bsml")]
@@ -165,8 +166,9 @@ namespace SliceDetails.UI
 				float angle = tile.angleAverages[i];
 				float offset = tile.offsetAverages[i];
 				Score score = tile.scoreAverages[i];
+				int notes = tile.tileNoteCounts[i];
 
-				_notes[i].SetNoteData(angle, offset, score);
+				_notes[i].SetNoteData(angle, offset, score, notes);
 			}
 		}
 

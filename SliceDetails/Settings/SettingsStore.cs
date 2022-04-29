@@ -12,15 +12,19 @@ namespace SliceDetails.Settings
 {
 	internal class SettingsStore
 	{
-		public float SliceDistance = 0f;
+		public bool ShowLiveView = true;
+		public bool SliceMappingEnabled = true;
+
 		public float SliceLength = .5f;
 		public float SliceWidth = .005f;
 		public float SliceTransparency = .2f;
-		public bool ShowLiveView = true;
+		public float NoteTransparency = .02f;
+		public float NoteScale = .8f;
 
-		public Vector3 SliceMapPosition = new Vector3(0, 0, 2f);
+		public float SliceMapScale = 1f;
+		public Vector3 SliceMapPosition = new Vector3(0, -.5f, 2.5f);
 		public Vector3 SliceMapRotation = new Vector3(30f, 0, 0);
-		public float SliceMapScale = .25f;
+		
 		public Vector3 ResultsUIPosition = new Vector3(-3.25f, 3.25f, 1.75f);
 		public Vector3 ResultsUIRotation = new Vector3(340.0f, 292.0f, 0.0f);
 		public Vector3 PauseUIPosition = new Vector3(-3.0f, 1.5f, 0.0f);
@@ -31,6 +35,7 @@ namespace SliceDetails.Settings
 		public bool TrueCutOffsets = true;
 		public bool CountArcs = true;
 		public bool CountChains = true;
+
 
 
 

@@ -25,7 +25,7 @@ namespace SliceDetails.UI
 		public void CreateFloatingScreen(Vector3 position, Quaternion rotation) {
 			_siraLog.Info("Creating floating screen: " + (_gridViewController == null));
 			_gridViewController.UpdateUINotesHoverHintController();
-
+		 
 
 			_floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 120f), true, position, rotation);
 			_floatingScreen.SetRootViewController(_gridViewController, ViewController.AnimationType.None);
@@ -55,6 +55,7 @@ namespace SliceDetails.UI
 				_gridViewController.gameObject.SetActive(false);
 				UnityEngine.Object.Destroy(_floatingScreen.gameObject);
 			}
+	 
 			_sliceProcessor.ResetProcessor();
 		}
 
