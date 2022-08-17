@@ -48,10 +48,10 @@ namespace SliceDetails
 				new(Shader.Find("Sprites/Default"))
 			};
 			SliceMaterial[2].color = new Color(0.75f, 0.75f, 0.75f, Plugin.Settings.NoteTransparency);
-			CreateGrid();
+			CreateNoteGrid();
 		}
 
-		public void CreateGrid()
+		public void CreateNoteGrid()
 		{
 			if (!SliceMap.activeSelf || SliceMap == null) return;
 

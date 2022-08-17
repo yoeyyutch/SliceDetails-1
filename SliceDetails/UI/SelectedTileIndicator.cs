@@ -6,6 +6,8 @@ using BeatSaberMarkupLanguage;
 
 namespace SliceDetails.UI
 {
+	// I believe this is the small grid of dots that shows which grid postion you are viewing
+
 	internal class SelectedTileIndicator : MonoBehaviour
 	{
 		private static Sprite newRoundRect;
@@ -29,6 +31,9 @@ namespace SliceDetails.UI
 			background.type = Image.Type.Sliced;
 			background.color = new Color(0.125f, 0.125f, 0.125f, 0.75f);
 			background.material = Utilities.ImageResources.NoGlowMat;
+
+
+			
 
 			for (int i = 0; i < 12; i++) {
 				ImageView tileDot = new GameObject("TileDot").AddComponent<ImageView>();
