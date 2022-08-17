@@ -4,6 +4,12 @@ A Beat Saber mod that lets you view your average cuts per-note angle per-grid po
 
 ![Screenshot 1](Images/screenshot.jpg)
 
+# SliceMap
+
+Adds an overlay showing each swing, which can be visible during gameplay and during replays. Currently working on a way to display the SliceMap on pause or on the results screen, but not be visible while playing, 
+
+![Screenshot 2](Images/OculusScreenshot1650093986.jpeg)
+
 ## Installation
 
 - Install `BeatSaberMarkupLanguage` and `SiraUtil` from ModAssistant or manually
