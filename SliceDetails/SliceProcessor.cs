@@ -81,6 +81,7 @@ namespace SliceDetails
 		{
 			if (!SliceMap.activeSelf || SliceMap == null) return;
 
+
 			float angle = cut.noteData.cutDirection.RotationAngle() + cut.cutDirDeviation + 90f;
 			//float index = (int)(noteInfo.noteGridPosition.y * 4 + noteInfo.noteGridPosition.x -5.5f);
 
@@ -92,6 +93,34 @@ namespace SliceDetails
 			slash.transform.SetLocalPositionAndRotation(cutPos, Quaternion.Euler(0, 0, angle));
 			slash.transform.localScale = new(Plugin.Settings.SliceLength, Plugin.Settings.SliceWidth, Plugin.Settings.SliceWidth);
 			slash.GetComponent<Renderer>().sharedMaterial = SliceMaterial[(int)cut.noteData.colorType];
+			Slices.Add(slash);
+		}
+
+		public void CreateOffsetSlice(NoteCutInfo cut)
+		{
+			if (!SliceMap.activeSelf || SliceMap == null) return;
+			//GameObject center = new();
+			//center.transform.SetParent(SliceMap.transform);
+			//center.transform.SetPositionAndRotation(SliceMap.transform.position, SliceMap.transform.rotation);
+			
+			
+			Quaternion cutAngle = Quaternion.Euler(0,0,cut.noteData.cutDirection.RotationAngle() + cut.cutDirDeviation + 90f);
+			Vector3 cutPos = new Vector3(cut.cutPoint.x, cut.cutPoint.y, cut.cutPoint.z * .25f);
+			Vector3 cutScale = new(Plugin.Settings.SliceLength, Plugin.Settings.SliceWidth, Plugin.Settings.SliceWidth);
+			//float index = (int)(noteInfo.noteGridPosition.y * 4 + noteInfo.noteGridPosition.x -5.5f);
+			//Vector2 cutOffset = cut.noteData.cutDirection.Direction();
+			
+			//GameObject s = Utils.GameObjectInitializer.Primative(SliceMap.transform, cutPos, )
+		
+			GameObject slash = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			slash.SetActive(false);
+			slash.transform.SetParent(SliceMap.transform);
+			slash.transform.SetPositionAndRotation(SliceMap.transform.position, SliceMap.transform.rotation);
+			slash.transform.SetLocalPositionAndRotation(cutPos, cutAngle);
+			slash.transform.Translate(0.3f, 0, 0, Space.Self);
+			slash.transform.localScale = cutScale;
+			slash.GetComponent<Renderer>().sharedMaterial = SliceMaterial[(int)cut.noteData.colorType];
+			slash.SetActive(Plugin.Settings.ShowLiveView);
 			Slices.Add(slash);
 		}
 

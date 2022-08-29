@@ -119,6 +119,10 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+	  <None Remove="UI\Views\modifiers.bsml" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 		<None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
 		<None Include="SliceDetails.csproj.user" Condition="Exists('SliceDetails.csproj.user')" />

@@ -5,6 +5,7 @@ using SiraUtil.Zenject;
 using SliceDetails.Installers;
 using SliceDetails.Settings;
 using BeatSaberMarkupLanguage.Settings;
+using BeatSaberMarkupLanguage.GameplaySetup;
 using SliceDetails.UI;
 using System.Diagnostics;
 using HarmonyLib;
@@ -24,7 +25,8 @@ namespace SliceDetails
 		public void Init(IPA.Logging.Logger logger, Config config, Zenjector zenject) {
 			Settings = config.Generated<SettingsStore>();
 			harmony = new Harmony("yoeyyutch.slice-details-1");
-			
+
+			GameplaySetup.instance.AddTab("Slices", $"SliceDetails.UI.Views.settingsView.bsml", SettingsViewController.instance);
 
 			BSMLSettings.instance.AddSettingsMenu("SliceDetails", $"SliceDetails.UI.Views.settingsView.bsml", SettingsViewController.instance);
 			
@@ -45,6 +47,7 @@ namespace SliceDetails
 		[OnDisable]
 		public void OnApplicationQuit()
 		{
+			GameplaySetup.instance.RemoveTab("Slices");
 			harmony.UnpatchSelf();
 		}
 	}

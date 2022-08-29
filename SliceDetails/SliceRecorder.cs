@@ -114,7 +114,7 @@ namespace SliceDetails
 
 				if (Plugin.Settings.SliceMappingEnabled)
 				{
-					_sliceProcessor.CreateSlice(slice.cutInfo);
+					_sliceProcessor.CreateOffsetSlice(slice.cutInfo);
 				}
 
 				_sliceScore.Remove(goodCutScoringElement.noteData);

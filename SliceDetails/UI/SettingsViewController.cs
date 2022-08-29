@@ -62,8 +62,8 @@ namespace SliceDetails.UI
 		[UIValue("show-liveview")]
 		public bool ShowLiveView
 		{
-			get { return Plugin.Settings.ShowLiveView; }
-			set { Plugin.Settings.ShowLiveView = value; }
+			get =>  Plugin.Settings.ShowLiveView; 
+			set => Plugin.Settings.ShowLiveView = value; 
 		}
 		[UIValue("show-pause")]
 		public bool ShowInPauseMenu

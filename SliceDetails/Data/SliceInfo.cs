@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using JetBrains.Annotations;
 
 namespace SliceDetails.Data
 {
@@ -26,6 +27,7 @@ namespace SliceDetails.Data
 			this.notePosition = cutInfo.notePosition;
 			this.noteGridPosition = new(cutInfo.noteData.lineIndex, (int)cutInfo.noteData.noteLineLayer);
 			this.noteIndex = (int)(noteGridPosition.y * 4 + noteGridPosition.x);
+			
 		}
 	}
 }
